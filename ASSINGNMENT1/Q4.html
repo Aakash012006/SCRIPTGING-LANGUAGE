@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Gallery Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            text-align: center;
+            padding: 30px;
+        }
+        img {
+            width: 200px;
+            height: auto;
+            opacity: 0.8;
+            border-radius: 10px;
+            margin: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#animateBtn").click(function(){
+                $("#galleryImg").animate({
+                    opacity: 1,
+                    width: "400px"
+                }, 1000); 
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Design Portfolio - Image Gallery</h2>
+    <img id="galleryImg" src="https://via.placeholder.com/200" alt="Gallery Image">
+    <br>
+    <button id="animateBtn">Animate Image</button>
+</body>
+</html>
