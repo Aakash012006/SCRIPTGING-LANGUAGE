@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Four Digit Number Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            text-align: center;
+            padding: 50px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+    <script>
+        function validateNumber() {
+            let num = document.getElementById("num").value;
+            if (!/^\d{4}$/.test(num)) {
+                alert("Please enter exactly 4 digits.");
+                return;
+            }
+            if (num[0] === '0') {
+                alert("First digit cannot be zero.");
+                return;
+            }
+            for (let i = 0; i < num.length - 1; i++) {
+                if (num[i] >= num[i + 1]) {
+                    alert("Digits must be in ascending order.");
+                    return;
+                }
+            }
+
+            alert("Valid Number: " + num);
+        }
+    </script>
+</head>
+<body>
+    <h2>Four Digit Number Validation</h2>
+    <input type="text" id="num" placeholder="Enter 4-digit number">
+    <button onclick="validateNumber()">Validate</button>
+</body>
+</html>
