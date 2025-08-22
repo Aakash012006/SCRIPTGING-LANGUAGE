@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>University Course Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 16px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .course-info {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .full {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        let courses = {
+            "CS101": { name: "Intro to Programming", seats: 2, prereq: "None", desc: "Basics of coding in Python." },
+            "CS102": { name: "Data Structures", seats: 0, prereq: "CS101", desc: "Learn about arrays, linked lists, and trees." },
+            "CS103": { name: "Web Development", seats: 3, prereq: "None", desc: "HTML, CSS, JavaScript for web apps." }
+        };
+
+        function showCourseDetails() {
+            let courseCode = document.getElementById("course").value;
+            let details = document.getElementById("courseDetails");
+
+            if (courseCode && courses[courseCode]) {
+                let c = courses[courseCode];
+                details.innerHTML = `<b>${c.name}</b><br>
+                                      Prerequisite: ${c.prereq}<br>
+                                      Description: ${c.desc}<br>
+                                      Seats Available: <span class="${c.seats===0 ? 'full':''}">${c.seats}</span>`;
+            } else {
+                details.innerHTML = "";
+            }
+        }
+
+        function validateForm() {
+            let name = document.getElementById("name").value.trim();
+            let regno = document.getElementById("regno").value.trim();
+            let courseCode = document.getElementById("course").value;
+
+            if (name === "" || regno === "" || courseCode === "") {
+                alert("All fields are required.");
+                return false;
+            }
+            if (courses[courseCode].seats === 0) {
+                alert("This course is fully booked. Please choose another.");
+                return false;
+            }
+
+            courses[courseCode].seats -= 1; 
+            alert("Registration Successful for " + courses[courseCode].name);
+            showCourseDetails(); 
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <h1>Course Registration System</h1>
+    <form onsubmit="return validateForm()">
+        <label>Student Name:</label>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <label>Registration Number:</label>
+        <input type="text" id="regno" placeholder="Enter your reg. no">
+
+        <label>Select Course:</label>
+        <select id="course" onchange="showCourseDetails()">
+            <option value="">-- Select --</option>
+            <option value="CS101">CS101</option>
+            <option value="CS102">CS102</option>
+            <option value="CS103">CS103</option>
+        </select>
+
+        <div id="courseDetails" class="course-info"></div>
+
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
